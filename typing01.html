@@ -40,7 +40,7 @@
             // console.log(typingTxt);
 
 
-            if(typingBool==false){
+            if(typingBool==false){ //타이핑이 진행되지 않았다면
                 typingBool=true;
                 var tyInt=setInterval(typing, 100)//반복동작
             }//
@@ -71,7 +71,7 @@
                     setTimeout(function(){
                         $(".typing").html("");
                         tyInt=setInterval(typing,100);
-                    }, 500)
+                    }, 1000)
                 }//큰 if
             }//typing()
 
