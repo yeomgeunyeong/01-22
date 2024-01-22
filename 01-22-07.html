@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script lang="java">
+        // window.attachEvent("onload", function(){
+        //     var header=document.getElementById("header");
+
+        //     header.attachEvent("onload", function(){alert("클릭")})
+        //     header.attachEvent("onload", function(){alert("클릭")})
+        //     header.attachEvent("onload", function(){alert("클릭")})
+        //     header.attachEvent("onload", function(){alert("클릭")})
+        // })//익스플로러
+
+
+        // window.onload=function(){
+        //     var header = document.getElementById("header");
+        //     var head = function(){alert("클릭")};
+        //     header.attachEvent("onclick", head);
+        //     header.detachEvent("onclick", head);
+        // }
+
+
+        window.onload=function(){
+            // var header=document.getElementById("header");
+            // header.addEventListener("click", function(){
+            //     this.innerHTML+="★";
+            // })
+
+            var header=document.getElementById("header");
+            if(header.attachEvent){
+                var head=function(){
+                    window.event.srcElement.style.color="red";
+                    window.event.srcElement.detachEvent("onclick", head);
+                }
+                header.attachEvent("onclick", head)
+            }else{
+                var head=function(){
+                    this.style.color="red";
+                    this.removeEventListener("click", head);
+                }
+                header.addEventListener("click", head)
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1 id="header">click</h1>
+</body>
+</html>

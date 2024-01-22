@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script lang="java">
+        window.onload=function(){
+            var header = document.getElementById("header");
+            function whenClick(){alert("click")};
+            //이벤트 연결
+            header.onclick=whenClick;
+            //이벤트 제거
+            header.onclick=null;
+
+            var hhh=document.getElementById("hhh");
+            hhh.onclick=whenClick;
+
+            var hi=document.getElementById("hi");
+            hi.onclick=function(){
+                alert("안녕하세요");
+                hi.onclick=null;
+            }//
+        }//
+    </script>
+</head>
+<body>
+    <h1 id="header">header1</h1>
+    <h2 id="hhh">안녕</h2>
+    <h3 id="hi">안녕하세요</h3>
+</body>
+</html>

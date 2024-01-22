@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src=" https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style type="text/css">
+        .typing_txt{
+            display: none;
+        }
+
+        .typing{
+            display: inline-block;
+            animation: cursor 0.5s infinite;
+        }
+
+        @keyframes cursor {
+            0%{border-right: 1px solid #fff;}
+            50%{border-right: 1px solid #000;}
+            100%{border-right: 1px solid #fff;}
+        }
+
+    </style>
+
+
+    <script lang="java">
+        $(function(){
+            var typingBool=false;
+            var liLength=$(".typing_txt>ul>li").length; //3개
+            var liIndex=0;  //li 인덱스
+            var typingInd=0; //타이핑글자 인덱스
+
+            //타이핑될 텍스트 가져오기
+            var typingTxt=$(".typing_txt>ul>li").eq(liIndex).text();
+            // console.log(typingTxt);
+
+            typingTxt=typingTxt.split("")//한글자씩 자른다
+            // console.log(typingTxt);
+
+
+            if(typingBool==false){
+                typingBool=true;
+                var tyInt=setInterval(typing, 100)//반복동작
+            }//
+
+            function typing(){
+                //타이핑 될 텍스트 길이만큼 반복
+                if(typingInd<typingTxt.length){
+                    $(".typing").append(typingTxt[typingInd]); //한글자씩 이어써주기
+                    typingInd++;
+                }else{
+                    //한문장이 끝나면 
+                    //다음 문장으로 
+                    //마지막 문장이면 다시 첫번째문장으로 
+                        if(liIndex==liLength-1){
+                            liIndex=0;
+                        }else{
+                            liIndex++;
+                        }//작은 if
+
+                    //다음 문장을 타이핑 하기 위한 셋팅
+                    typingInd=0;
+                    typingBool=false;
+                    typingTxt=$(".typing_txt > ul > li").eq(liIndex).text();
+
+                    //다음 문장 타이핑 전 1초 쉬기
+                    
+                    clearInterval(tyInt);
+                    setTimeout(function(){
+                        $(".typing").html("");
+                        tyInt=setInterval(typing,100);
+                    }, 500)
+                }//큰 if
+            }//typing()
+
+
+        })//jquery
+    </script>
+</head>
+<body>
+    <div class="typing_txt">
+        <ul>
+            <li>타이핑될 첫번째 문장</li>
+            <li>타이핑 두번째 문장</li>
+            <li>마지막 문장</li>
+        </ul>
+    </div><!-- typing_txt -->
+
+    <p class="typing"></p>
+</body>
+</html>

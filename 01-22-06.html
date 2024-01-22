@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script lang="java">
+        window.onload=function(){
+            //이벤트 연결
+            document.getElementById("header").onclick=function(){
+                alert("header클릭");
+            }//
+
+            // document.getElementById("para").onclick=function(){
+            //     alert("문단클릭");
+            // }//
+
+
+
+            document.getElementById("para").onclick=function(e){
+                // 이벤트 객체를 처리
+                var event=e||window.event;
+
+                //이벤트 발생
+                alert("문단문단");
+
+                //이벤트를 전달 제거
+                event.cancelBubble=true;
+                if(event.stopPropagation){
+                    event.stopPropagation();
+                }
+            }
+        }//
+    </script>
+</head>
+<body>
+    <h1 id="header">
+        <p id="para">문단 문단 문단</p>
+    </h1>
+</body>
+</html>
