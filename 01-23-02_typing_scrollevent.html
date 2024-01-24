@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src=" https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style type="text/css">
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+        ul, li{list-style: none;}
+
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+
+        #wrap{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .page{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        #page1{background-color: black;}
+        #page2{background-color: dimgray;}
+        #page3{background-color: rgb(189, 223, 40);}
+
+        #page1 p{
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        p.typing_txt1, p.typing_txt2{
+            display: none;
+        }
+
+        .typing1, .typing2{
+            display: inline-block;
+            animation-name: cursor;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            font-size: 25px;
+            text-shadow: 1px 1px 5px black;
+        }
+
+        @keyframes cursor {
+            0%{border-right: 1px solid black;}
+            50%{border-right: 1px solid white;}
+            100%{border-right: 1px solid black;}
+        }
+    </style>
+
+
+
+    <script lang="java">
+        $(function(){
+            
+            var currentPage=1;
+            var maxPageNum=3;
+
+            //타이핑을 위한 변수
+            var typingBool1=false;
+            var typingBool2=false;
+            
+            var typingInd1=0;
+            var typingInd2=0;
+
+            var typingTxt1=$(".typing_txt1").text();
+                var typingTxt1=typingTxt1.split("");
+
+            var typingTxt2=$(".typing_txt2").text();
+                var typingTxt2=typingTxt2.split("");
+
+
+            //스크롤 이벤트
+            $("#wrap").on("mousewheel", function(e){
+                var wheel=e.originalEvent.wheelDelta;
+                console.log(wheel); //120(scroll up) -120(scroll down)
+
+                var scroll=0;
+                var currentPageHeight=$(document).innerHeight();
+                console.log(currentPageHeight);
+
+                if(wheel>0){ 
+                    //스크롤이 올라갈때, 스크롤 올릴 때
+                    if(currentPage-1<1){
+                        currentPage=1
+                    }else{
+                        currentPage=currentPage-1;
+                    }
+
+                }else{
+                    //스크롤 내릴 때
+                    if(currentPage+1 > maxPageNum){
+                        currentPage=maxPageNum;
+                    }else{
+                        currentPage=currentPage+1;
+                    }
+                }
+                console.log(currentPage);
+
+
+                scroll=(currentPage-1)*currentPageHeight;
+                console.log("scroll:", scroll)
+                $("#wrap").animate({scrollTop:scroll}, 500);
+
+
+
+                //스크롤이 진행될 때 2페이지인 경우
+                if(currentPage===2){
+                    setTimeout(function(){
+                        if(typingBool1==false){
+                            typingBool1=true;
+                            time=setInterval(typing, 100)
+                        }
+                    }, 500)
+                }else if(currentPage===3){
+                    //스크롤이 진행될 때 3페이지인 경우
+                    setTimeout(function(){
+                        if(typingBool2==false){
+                            typingBool2=true;
+                            time2=setInterval(typing2, 100)
+                        }
+                    }, 500)
+                }
+
+
+                function typing(){
+                    if(typingInd1<typingTxt1.length){
+                        $(".typing1").append(typingTxt1[typingInd1]);
+                        typingInd1++;
+                    }else{
+                        clearInterval(time);
+                        typingBool1=false;
+                    }//
+                }
+
+
+
+                function typing2(){
+                    if(typingInd2<typingTxt2.length){
+                        $(".typing2").append(typingTxt2[typingInd2]);
+                        typingInd2++;
+                    }else{
+                        clearInterval(time2);
+                        typingBool2=false;
+                    }//
+                }
+
+
+
+
+                $(".typing1").html("");
+                clearInterval(time);
+                typingBool1=false;
+                typingInd11=0;
+
+                $(".typing2").html("");
+                clearInterval(time2);
+                typingBool2=false;
+                typingInd12=0;
+            })//
+
+            
+        })//jquery
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <div class="page" id="page1">
+            <p>Hello world</p>
+        </div>
+        <div class="page" id="page2">
+            <p class="typing_txt1">안녕하세요</p>
+            <p class="typing1"></p>
+        </div>
+        <div class="page" id="page3">
+            <p class="typing_txt2">반갑습니다</p>
+            <p class="typing2"></p>
+        </div>
+    </div><!-- wrap -->
+</body>
+</html>

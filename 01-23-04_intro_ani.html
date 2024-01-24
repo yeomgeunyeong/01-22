@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+
+        body{
+            background-color: #000;
+            height: 100vh;  /* html태그에 높이가 지정되어있지 않으면 100% 사용불가 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .face{
+            width: 125px;
+            height: 125px;
+            /* border:  1px solid white; */
+            animation: move 4s infinite alternate;
+            transform: scale(0.15);
+        }
+
+        @keyframes move {
+            0%{transform: scale(0.15) rotate(180deg);}
+            100%{transform: scale(1) rotate(0deg);}
+        }
+
+        .circle{
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            position: absolute;
+            mix-blend-mode: screen;
+        }
+
+        .circle:nth-child(odd){
+            background-color: cornflowerblue;
+        }
+
+        .circle:nth-child(even){
+            background-color: rgb(94, 145, 196);
+        }
+
+
+
+        @keyframes circle_1{
+            0%{transform: translate(0,0);}
+            100%{transform: translate(-35px, -50px);}
+        }
+        .circle:nth-child(1){
+            animation: circle_1 4s ease infinite alternate;
+        }
+
+
+        @keyframes circle_2{
+            0%{transform: translate(0,0);}
+            100%{transform: translate(35px, 50px);}
+        }
+        .circle:nth-child(2){
+            animation: circle_2 4s ease infinite alternate;
+        }
+
+
+        @keyframes circle_3{
+            0%{transform: translate(0,0);}
+            100%{transform: translate(-60px, 0);}
+        }
+        .circle:nth-child(3){
+            animation: circle_3 4s ease infinite alternate;
+        }
+
+
+        @keyframes circle_4{
+            0%{transform: translate(0,0);}
+            100%{transform: translate(60px, 0);}
+        }
+        .circle:nth-child(4){
+            animation: circle_4 4s ease infinite alternate;
+        }
+
+
+        @keyframes circle_5{
+            0%{transform: translate(0,0);}
+            100%{transform: translate(-35px, 50px);}
+        }
+        .circle:nth-child(5){
+            animation: circle_5 4s ease infinite alternate;
+        }
+
+
+        @keyframes circle_6{
+            0%{transform: translate(0,0);}
+            100%{transform: translate(35px, -50px);}
+        }
+        .circle:nth-child(6){
+            animation: circle_6 4s ease infinite alternate;
+        }
+
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="face">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+</body>
+</html>

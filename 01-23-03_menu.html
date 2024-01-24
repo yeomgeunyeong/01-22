@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src=" https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+    <style type="text/css">
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+
+        body{
+            background-color: rgb(156, 241, 241);
+            font-family: 'Times New Roman', Times, serif;
+            color: rgb(255, 127, 53);
+            overflow: hidden;
+        }
+
+        .info{
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            font-size: 50px;
+        }
+
+        .menu{
+            width: 46px;
+            height: 46px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .menu_circle{
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(1);
+            z-index: 100;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .menu:hover .menu_circle{
+            transform: scale(1.3);
+        }
+
+        .menu.open .menu_circle{
+            transform: scale(90);
+        }
+
+        .menu_link{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 150;
+        }
+
+        .menu_icon{
+            width: 20px;
+            height: 16px;
+            margin: auto;
+            position: absolute;
+            left: 0; 
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* border: 1px solid red; */
+        }
+
+        .menu_line{
+            background-color: #333;
+            width: 100%;
+            height: 2px;
+            position: absolute;
+            left: 0;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu_line_1{}
+
+        .menu_line_2{
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .menu_line_3{
+            bottom: 0;
+        }
+
+        .menu.open .menu_line_1{
+            transform: translateY(8px) translateY(-50%) rotate(45deg);
+        }
+        
+        .menu.open .menu_line_2{
+            opacity: 0;
+        }
+        
+        .menu.open .menu_line_3{
+            transform: translateY(-8px) translateY(50%) rotate(-45deg);
+        }
+
+
+        .overlay_info{
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .menu_overlay{
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            text-align: center;
+            z-index: 102;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            visibility: hidden; /* display:none 이랑 동일 */
+            transition: all 0.5s ease-in-out;
+        }
+
+        .menu_overlay.open{
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+
+
+
+    <script lang="java">
+        $(function(){
+
+            $(".menu_link").click(function(){
+                $(".menu").toggleClass("open");
+                $(".menu_overlay").toggleClass("open");
+            })//click
+
+
+
+        })//jquery
+    </script>
+</head>
+<body>
+    <h1 class="info">
+        Click On The Menu Button
+    </h1><!-- info -->
+
+    <div class="menu ">
+        <span class="menu_circle"></span>
+
+        <a href="#" class="menu_link">
+            <span class="menu_icon">
+                <span class="menu_line menu_line_1"></span>
+                <span class="menu_line menu_line_2"></span>
+                <span class="menu_line menu_line_3"></span>
+            </span><!-- menu_icon -->
+        </a><!-- menu_link -->
+    </div><!-- menu -->
+
+    <div class="menu_overlay">
+        <h1 class="overlay_info">
+            You can add your menu here. <br>
+            i used this gif instead
+        </h1><!-- overlay_info -->
+        <img src="img/000.jpg" alt="000">
+    </div>
+</body>
+</html>
